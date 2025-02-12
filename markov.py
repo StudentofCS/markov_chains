@@ -53,26 +53,28 @@ def make_chains(text_string):
         word2 = words[i + 1]
         key = (word1, word2)
         # Value = words[i + 2]
-        values = words[i + 2]
+        # values = words[i + 2]
 
         values = []
         if i != len(words) - 2:
 
             values.append(words[i + 2])
-            
+
         elif i == len(words) -2:
             values.append(None)
         
         # For loop getting values
         for i in range(len(words) - 2):
-            if 
+            if words[i] == word1:
+                if words[i + 1] == word2: 
+                    values.append(words[i + 2])
             
         chains[key] = chains.get(key, values)
         
-        """"
+        """
         words.find('word1 + " " + word2')
         words.count('word1 + " " + word2')
-        """"
+        """
         
 
     
