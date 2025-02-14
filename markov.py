@@ -48,7 +48,9 @@ def make_chains(text_string):
     
 
     # Creating the keys for dict
-    for i in range(len(words) - 1):
+    second_last_word = len(words) - 1
+
+    for i in range(second_last_word):
         word1 = words[i]
         word2 = words[i + 1]
         key = (word1, word2)
@@ -56,11 +58,14 @@ def make_chains(text_string):
         # values = words[i + 2]
 
         values = []
+
+        # If word1 and word2 are not the last two words, add third word to values
         if i != len(words) - 2:
 
             values.append(words[i + 2])
 
-        elif i == len(words) -2:
+        # Else add None as the value
+        elif i == len(words) - 2:
             values.append(None)
         
         # For loop getting values
@@ -87,12 +92,28 @@ def make_text(chains):
 
     words = []
 
-    # your code goes here
+    # Pick a random starting key from chains
+    if chains:
+        key = choice(list(chains.keys()))
+        words.extend([key[0], key[1]])
 
+#Keep adding words until we hit none or reach 
+    while chains.get((words[-2], words[-1])) != None:
+         # ["apple", "banana", "cherry", "orange", "berry"]
+
+        next_words = chains.get((words[-2], words[-1]))
+        # if we hit none, stop
+        if not next_words or None in next_words:
+            break
+
+        next_words = choice(next_words)
+
+        words.append(next_words)
+        
     return ' '.join(words)
 
 
-input_path = 'green-eggs.txt'
+input_path = 'gettysburg.txt'
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
